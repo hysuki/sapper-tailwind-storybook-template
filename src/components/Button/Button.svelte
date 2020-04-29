@@ -1,8 +1,9 @@
 <button
-        class="button {roundedClass} bg-orange-400"
-        on:click={onClick()}>
-  <strong>{rounded ? 'Round' : 'Square'} corners</strong><br>
-  {text}
+  class="button"
+  class:rounded={rounded}
+  on:click={onClick}>
+  <strong>{ rounded ? 'Round' : 'Square' } corners</strong><br>
+  { text }
   <slot></slot>
 </button>
 
@@ -10,19 +11,29 @@
   .rounded {
     border-radius: 35px;
   }
+
   .button {
     border: 3px solid;
     padding: 10px 20px;
+    background-color: white;
     outline: none;
   }
 </style>
 
 <script>
-  export let roundedClass = false
-  export let rounded = false
-  export let text = 'text'
+  import { createEventDispatcher, afterUpdate } from 'svelte';
+  export let text = '';
+  export let rounded = true;
 
-  const onClick = (e) => {
-    console.log(e)
+  const dispatch = createEventDispatcher();
+
+  function onClick(event) {
+    rounded = !rounded;
+
+    dispatch('click', event);
   }
+
+  afterUpdate(() => {
+    dispatch('afterUpdate');
+  });
 </script>

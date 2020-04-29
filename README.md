@@ -9,11 +9,13 @@
 git clone https://github.com/asideHazle/sapper-tailwind-storybook-template
 ```
 
+
 ### Using GitHub templates
 
-```bash
+``` bash
 npm install # or yarn install
 ```
+
 
 ### Running the project
 
